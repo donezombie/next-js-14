@@ -1,4 +1,4 @@
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import AuthenticationProvider from "@/providers/AuthenticationProvider";
 import PageContent from "./page-content";
 
@@ -9,9 +9,9 @@ type IIndexProps = {
 export default async function SignIn(props: IIndexProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
-  const t = await getTranslations({
-    locale,
-  });
+  // const t = await getTranslations({
+  //   locale,
+  // });
 
   return (
     <div className="component:SignIn">
