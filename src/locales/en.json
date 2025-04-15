@@ -73,6 +73,10 @@
     "sign_out": "Sign out"
   },
   "Shared": {
-    "login": "Login"
+    "login": "Login",
+    "yes": "Yes",
+    "close": "Close",
+    "settings": "Settings",
+    "logout": "Logout"
   }
 }

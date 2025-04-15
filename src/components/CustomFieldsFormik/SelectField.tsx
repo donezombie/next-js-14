@@ -4,23 +4,11 @@ import { Label } from "../ui/label";
 import { get, isEqual, isString } from "lodash";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { useRef, useState } from "react";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-} from "../ui/command";
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "../ui/command";
 import CommonIcons from "../CommonIcons";
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 
 export const ModeSelectEnums = {
   default: "default",
@@ -71,9 +59,7 @@ const SelectField = (props: SelectFieldProps & AdditionalFormikProps) => {
 
   const msgError = get(touched, name) && (get(errors, name) as string);
 
-  const valueFound = options.find(
-    (option) => `${option.value}` === `${value}`
-  )?.label;
+  const valueFound = options.find((option) => `${option.value}` === `${value}`)?.label;
 
   //! Function
 
@@ -121,7 +107,7 @@ const SelectField = (props: SelectFieldProps & AdditionalFormikProps) => {
           }
         }}
       >
-        <PopoverTrigger>
+        <PopoverTrigger asChild>
           <Button
             ref={buttonRef}
             variant="outline"
@@ -144,9 +130,7 @@ const SelectField = (props: SelectFieldProps & AdditionalFormikProps) => {
         >
           <Command>
             <CommandInput placeholder={placeholderSearch || "Search item"} />
-            <CommandEmpty>
-              {messageItemNotFound || "No item found."}
-            </CommandEmpty>
+            <CommandEmpty>{messageItemNotFound || "No item found."}</CommandEmpty>
             <CommandGroup>
               {options.map((option) => (
                 <CommandItem
@@ -158,8 +142,7 @@ const SelectField = (props: SelectFieldProps & AdditionalFormikProps) => {
                       return;
                     }
 
-                    const result =
-                      `${value}` === `${option.value}` ? "" : option.value;
+                    const result = `${value}` === `${option.value}` ? "" : option.value;
                     setFieldValue(name, result);
                     afterOnChange && afterOnChange(result);
                     setOpen(false);
@@ -182,18 +165,9 @@ const SelectField = (props: SelectFieldProps & AdditionalFormikProps) => {
   };
 
   return (
-    <div
-      className={twMerge(
-        "grid w-full items-center gap-1.5",
-        classNameContainer
-      )}
-    >
+    <div className={twMerge("grid w-full items-center gap-1.5", classNameContainer)}>
       {label && (
-        <Label
-          className={twMerge("mb-1", required && "required", classNameLabel)}
-        >
-          {label}
-        </Label>
+        <Label className={twMerge("mb-1", required && "required", classNameLabel)}>{label}</Label>
       )}
 
       {renderSelectByMode()}

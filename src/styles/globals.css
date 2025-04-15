@@ -10,6 +10,9 @@
 
 @layer base {
   :root {
+    --height-nav: 78px;
+    --sidebar-width: 16rem;
+    
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
@@ -76,5 +79,19 @@
   
   .icon {
     @apply mr-2 h-4 w-4;
+  }
+
+  .is-hover:hover {
+    @apply rounded-md;
+    @apply cursor-pointer;
+    /* background-color: rgb(0, 153, 125); */
+    @apply bg-primary;
+    @apply text-white;
+    @apply transition-all;
+  }
+
+  .side-bar__menu__item:hover, .side-bar__menu__item.is-active {
+    @apply bg-gray-100;
+    @apply rounded-md;
   }
 }

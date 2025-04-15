@@ -10,7 +10,7 @@ import urls from "./constants/urls";
 
 const intlMiddleware = createMiddleware(routing);
 
-const protectedPages = [urls.Dashboard];
+const protectedPages = [urls.Homepage, urls.Dashboard];
 
 const authPages = [urls.SignIn, urls.SignUp];
 

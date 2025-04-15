@@ -1,6 +1,6 @@
-import { parseAuthFromCookie } from '@/utils/helpers';
-import type { AxiosInstance } from 'axios';
-import axios from 'axios';
+import { parseAuthFromCookie } from "@/utils/helpers";
+import type { AxiosInstance, AxiosRequestConfig } from "axios";
+import axios from "axios";
 
 class HttpService {
   axios: AxiosInstance;
@@ -14,7 +14,7 @@ class HttpService {
       },
       (error) => {
         return Promise.reject(error);
-      },
+      }
     );
   }
 
@@ -28,8 +28,24 @@ class HttpService {
       },
       (error) => {
         return Promise.reject(error);
-      },
+      }
     );
+  }
+
+  get(url: string, config?: AxiosRequestConfig) {
+    return this.axios.get(url, config);
+  }
+
+  post(url: string, data: any, config?: AxiosRequestConfig) {
+    return this.axios.post(url, data, config);
+  }
+
+  delete(url: string, config?: AxiosRequestConfig) {
+    return this.axios.delete(url, config);
+  }
+
+  put(url: string, data: any, config?: AxiosRequestConfig) {
+    return this.axios.put(url, data, config);
   }
 }
 

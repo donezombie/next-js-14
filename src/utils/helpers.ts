@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment from "moment";
 import { JWT_AUTH } from "@/constants/common";
 import type { Auth } from "@/interfaces/auth.interface";
 import { routing } from "@/lib/i18nNavigation";
@@ -11,10 +11,7 @@ export const getBaseUrl = () => {
     return process.env.NEXT_PUBLIC_APP_URL;
   }
 
-  if (
-    process.env.VERCEL_ENV === "production" &&
-    process.env.VERCEL_PROJECT_PRODUCTION_URL
-  ) {
+  if (process.env.VERCEL_ENV === "production" && process.env.VERCEL_PROJECT_PRODUCTION_URL) {
     return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
   }
 

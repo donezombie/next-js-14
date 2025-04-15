@@ -48,7 +48,7 @@ const PageContent = () => {
               <div className="mb-8 flex justify-center text-3xl font-bold">Logo here</div>
               <Card className="shadow-md">
                 <CardHeader className="pb-5">
-                  <h1 className="text-2xl font-semibold tracking-tight">
+                  <h1 className="text-2xl font-semibold tracking-tight mb-2">
                     Login (donezombie / donezombie)
                   </h1>
                   <p className="text-sm text-muted-foreground">
@@ -83,7 +83,6 @@ const PageContent = () => {
                   </Link>
 
                   <Button type="submit" isLoading={isSubmitting}>
-                    {t("Counter.security_powered_by")}
                     <CommonIcons.LogIn className="icon" /> {t("Shared.login")}
                   </Button>
                 </CardContent>

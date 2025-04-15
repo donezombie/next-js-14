@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { InputProps } from "../ui/input";
-import { AdditionalFormikProps, TimeValue } from "@/interfaces/common.interface.interface";
+import { AdditionalFormikProps, TimeValue } from "@/interfaces/common.interface";
 import { Label } from "../ui/label";
 import { twMerge } from "tailwind-merge";
 import { get, isString } from "lodash";
@@ -24,9 +24,7 @@ interface DateTimePickerFieldProps extends InputProps {
   hideTimePicker?: boolean;
 }
 
-const DateTimePickerField = (
-  props: DateTimePickerFieldProps & AdditionalFormikProps
-) => {
+const DateTimePickerField = (props: DateTimePickerFieldProps & AdditionalFormikProps) => {
   //! State
   const {
     label,
@@ -64,12 +62,15 @@ const DateTimePickerField = (
     setFieldValue(name, nextDate);
   };
 
-  const onHandleChangeTime = (timeValue: TimeValue) => {
+  const onHandleChangeTime = (timeValue: TimeValue | null) => {
     const nextDate = momentInstance(value).toDate();
-    nextDate.setHours(timeValue.hour);
-    nextDate.setMinutes(timeValue.minute);
-    nextDate.setSeconds(timeValue.second);
-    nextDate.setMilliseconds(timeValue.millisecond);
+
+    if (timeValue) {
+      nextDate.setHours(timeValue.hour);
+      nextDate.setMinutes(timeValue.minute);
+      nextDate.setSeconds(timeValue.second);
+      nextDate.setMilliseconds(timeValue.millisecond);
+    }
 
     setFieldValue(name, nextDate);
     afterOnChange && afterOnChange(nextDate);
@@ -91,17 +92,9 @@ const DateTimePickerField = (
 
   //! Render
   return (
-    <div
-      className={twMerge(
-        "grid w-full items-center gap-1.5",
-        classNameContainer
-      )}
-    >
+    <div className={twMerge("grid w-full items-center gap-1.5", classNameContainer)}>
       {label && (
-        <Label
-          htmlFor={name}
-          className={twMerge("mb-1", required && "required", classNameLabel)}
-        >
+        <Label htmlFor={name} className={twMerge("mb-1", required && "required", classNameLabel)}>
           {label}
         </Label>
       )}
@@ -117,7 +110,7 @@ const DateTimePickerField = (
               setCalendarOpen(open);
             }}
           >
-            <PopoverTrigger className="flex-1">
+            <PopoverTrigger className="flex-1" asChild>
               <Button
                 variant="outline"
                 className={cn(
@@ -140,9 +133,7 @@ const DateTimePickerField = (
                 mode="single"
                 selected={value}
                 onSelect={onHandleChange}
-                disabled={(date) =>
-                  date > new Date() || date < new Date("1900-01-01")
-                }
+                disabled={(date) => date > new Date() || date < new Date("1900-01-01")}
                 initialFocus
               />
             </PopoverContent>
@@ -153,14 +144,11 @@ const DateTimePickerField = (
           <TimePicker
             value={timeValue as TimeValueAria}
             onChange={onHandleChangeTime}
-            className={twMerge(msgError && "border-red-500")}
+            className={twMerge("max-h-[36px]", msgError && "border-red-500")}
           />
         )}
 
-        <Button
-          variant="outline"
-          onClick={() => setFieldValue(name, undefined)}
-        >
+        <Button variant="outline" onClick={() => setFieldValue(name, undefined)}>
           <CommonIcons.X className="ml-auto h-4 w-4 opacity-50" />
         </Button>
       </div>
